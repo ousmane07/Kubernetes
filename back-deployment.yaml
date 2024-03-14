@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: github-action
+  labels:
+    app: github-action
+  namespace: lab1
+spec:
+  selector:
+    matchLabels:
+      app: github-action
+  replicas: 2 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: github-action
+    spec:
+      containers:
+        - name: github-action
+          image: ousmane07/github-action:0.0.1 # Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080 # The port that the container is running on in the cluster
